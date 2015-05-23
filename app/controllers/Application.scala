@@ -7,10 +7,6 @@ import play.api.libs.functional.syntax._
 
 object Application extends Controller {
 
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
-  }
-
   val readsInvitation = (
   	(__ \ 'invitee).read[String] and
   	(__ \ 'email).read[String]

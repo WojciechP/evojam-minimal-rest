@@ -3,7 +3,6 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
 POST	/invitation					controllers.Application.post_invitation
 
 # Map static resources from the /public folder to the /assets URL path
