@@ -1,0 +1,6 @@
+This is the minimal REST application example.
+=================================
+
+It handles only two endopoints (check routes file)
+with hardcoded responses (see Application.scala).
+
