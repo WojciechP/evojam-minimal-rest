@@ -7,6 +7,11 @@ import play.api.libs.functional.syntax._
 
 object Application extends Controller {
 
+	val canned_response = Json.arr(Json.obj(
+		"invitee" -> "John Smith",
+		"email" -> "john@smith.mx"
+	))
+
   val readsInvitation = (
   	(__ \ 'invitee).read[String] and
   	(__ \ 'email).read[String]
@@ -18,5 +23,8 @@ object Application extends Controller {
   	} recoverTotal {
   		e => BadRequest(JsError.toFlatJson(e))
   	}
+  }
+  def get_invitation = Action {
+  	Ok(canned_response)
   }
 }

@@ -27,9 +27,19 @@ class ApplicationSpec extends Specification {
     }
 
     "discard POST invitations with missing data" in new WithApplication {
-      val json = Json.parse("""{"invitee":"John SMith", "useless_field":"value"}""")
+      val json = Json.parse("""{"invitee":"John Smith", "useless_field":"value"}""")
       val invitation = route(FakeRequest(POST, "/invitation").withJsonBody(json)).get
       status(invitation) must equalTo(400)
+    }
+
+    "return the invitee on GET request" in new WithApplication {
+      val invitation = route(FakeRequest(GET, "/invitation")).get
+
+      status(invitation) must equalTo(OK)
+      val json = Json.parse(contentAsString(invitation))
+      (json(0) \ "invitee").as[String] must equalTo("John Smith")
+      (json(0) \ "email").as[String] must equalTo("john@smith.mx")
+
     }
   }
 }
